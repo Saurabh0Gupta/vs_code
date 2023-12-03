@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="main">
+      <div id="left">
+        <div id="folder">
+          <h4 style="text-transform: capitalize;"><%=folder%></h4>
+          <div id="icons">
+            <i id="fileicon" class="ri-file-line"></i>
+            <i id="foldericon"class="ri-folder-line"></i>
+            <a href="/"><i class="ri-restart-line"></i></a>
+            <i class="ri-file-copy-line"></i>
+          </div>
+        </div>
+        <form style="display: none;" id="createfileform" action="/createfile">
+          <input type="text" name="file" style="color: black;" id="fileinput"  placeholder="filename">
+        </form>
+        <form style="display: none;" id="createfolderform" action="/createfolder">
+          <input type="text" name="folder" style="color: black;" id="folderinput"  placeholder="foldername">
+        </form>
+        <div id="files">
+          <% files.forEach(function(file){ %>
+            <div class="filediv">
+              <div class="folder-name">
+                <%if(file.isDirectory()){ %>
+                  <i class="ri-folder-fill"></i>
+                <%}else{ %>
+                  <i class="ri-file-fill"></i>
+               <% }%>
+                <h3><%= file.name %></h3>
+              </div>
+              <%if(file.isDirectory()){%>
+                <a href="/delete/folder/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
+                <%}else{%>
+                  <div id="ficons">
+                    <a href="/delete/file/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
+                  <%}%>
+              
+                <i class="ri-pencil-line"></i>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+      <div id="right">
+
+      </div>
+    </div>
+    <script>
+      var clicked=0
+
+      document.querySelector("#fileicon").addEventListener("click",function(){
+        donooff()
+        document.querySelector("#createfileform").style.display="initial";
+      
+      })
+      document.querySelector("#foldericon").addEventListener("click",function(){
+        donooff()
+        document.querySelector("#createfolderform").style.display="initial";
+      })
+
+      function donooff(){
+        document.querySelectorAll("form").forEach(function(form){
+          form.style.display="none";
+        })
+      }
+      window.addEventListener("click  ",function(dets){
+        console.log(dets)
+      })
+    </script>
+  </body>
+</html>
