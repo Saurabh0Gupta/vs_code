@@ -32,7 +32,7 @@
                 <%}else{ %>
                   <i class="ri-file-fill"></i>
                <% }%>
-                <h3><%= file.name %></h3>
+                <h3><a href="fileopened/<%=file.name%>"><%= file.name %></a></h3>
               </div>
               <%if(file.isDirectory()){%>
                 <a href="/delete/folder/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
@@ -48,28 +48,25 @@
         </div>
       </div>
       <div id="right">
-
+        
       </div>
     </div>
     <script>
-      var clicked=0
-
       document.querySelector("#fileicon").addEventListener("click",function(){
         donooff()
         document.querySelector("#createfileform").style.display="initial";
-      
       })
       document.querySelector("#foldericon").addEventListener("click",function(){
         donooff()
         document.querySelector("#createfolderform").style.display="initial";
       })
-
       function donooff(){
         document.querySelectorAll("form").forEach(function(form){
           form.style.display="none";
         })
       }
-      window.addEventListener("click  ",function(dets){
+
+      document.querySelector("#left").addEventListener("click  ",function(dets){
         console.log(dets)
       })
     </script>

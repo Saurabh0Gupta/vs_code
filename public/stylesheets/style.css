@@ -103,3 +103,9 @@ height: 100%;
 a{
   text-decoration: none;
 }
+#right #newtab{
+  width: 150px;
+  height: 30px;
+  background-color: crimson;
+
+}
