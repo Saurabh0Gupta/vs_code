@@ -11,9 +11,9 @@ width: 100%;
 height: 100%;
 }
 #main{
-  position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  background-color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,91 +21,147 @@ height: 100%;
 #left{
   width: 22%;
   height: 100%;
-  background-color: rgb(49, 48, 48); 
-  padding-top: 60px;
-  transition: all ease 2s;
+  background-color:  rgb(49, 48, 48);
+  padding-top: 40px;
 }
 #folder{
   width: 100%;
-  height: 30px;
-  /* background-color: crimson; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0px 30px;
-  /* margin-bottom: 10px; */
+  /* background-color: crimson; */
 }
-#folder h4{
-  font-size: 20px;
-  font-weight: 600;
+#folder h1{
+  font-size: 30px;
+  font-family: gilroy;
+  font-weight: 800;
 }
-#icons i{
-  display: initial;
-  margin-left: 5px;
-  font-size: 20px;
-  cursor: pointer;
-}
-#icons a{
-  text-decoration: none;
-}
-/* #left:hover i{
-  display: initial;
-} */
-.file:hover {
-  background-color: #232222;
-}
-/* .file:hover #ficons i{
-  display: initial;
-} */
-#files{
-  /* height: 100%; */
-  margin-top: 40px;
-  width: 100%;
-  /* background-color: salmon; */
-  padding: 0px 40px;
-  min-height: 200px;
-}
-.folder-name{
-  /* background-color: yellow; */
+#ficon{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 10px;
+  /* background-color: yellow; */
 }
-.filediv{
-  /* background-color: lightblue; */
+#ficon i{
+  cursor: pointer;
+  font-size: 20px;
+}
+#files{
+  width: 100%;
+  padding: 20px 30px;
+}
+.file{
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0px;
-  padding: 5px 8px;
-  width: 100%;
-  min-height: 20px;
+  font-size: 20px;
+  margin-top:15px ;
+  padding: 3px 8px;
 }
-.filediv h3{
-  font-weight: 500;
-  font-size: 17px;
-}
-#ficons{
-  display: flex;
-}
-.filediv #ficons i{
-  font-size: 17px;
+#ficons i{
   margin-left: 10px;
-  /* display: block; */
-  cursor: pointer;
+  font-size: 15px;
+  display: none;
+}
+.file:hover{
+  background-color: rgb(71, 70, 70);
+}
+.file:hover #ficons i{
+  display: initial;
 }
 #right{
   width: 78%;
+  background-color: #000;
   height: 100%;
-  background-color: rgb(25, 25, 25);
 }
 a{
   text-decoration: none;
 }
-#right #newtab{
-  width: 150px;
+#right nav{
+  width: 100%;
+  background-color: rgb(66, 64, 64);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 0px 50px; */
+}
+#tab{
+  width: 200px;
+  height: 100%;
+  background-color:#181818;
+  position: relative;
+  font-size: 25px;
+  display: flex;
+  padding: 0px 20px;
+  align-items: center;
+  justify-content: space-between;
+  /* font-weight: 100; */
+}
+#tab h6{
+  font-weight: 300;
+}
+#btn{
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
   height: 30px;
-  background-color: crimson;
-
+  padding: 6px 13px;
+  background-color: red;
+  border-radius: 50px;
+  cursor: pointer;
+}
+#btn h4{
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+#textarea{
+  width: 100%;
+  height: calc(90vh - 40px);
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+#overlay{
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff1c;
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 0%;
+  z-index: 10;
+  display: none;
+}
+#overlay form{
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: column;
+  background-color: #000000;
+  border-radius: 20px;
+}
+#rename{
+  height: 30px;
+}
+#btn-over{
+  font-size: 20px;
+  padding: 5px 10px;
+  background-color: royalblue;
+  border-radius: 20px;
+  border: none;
 }

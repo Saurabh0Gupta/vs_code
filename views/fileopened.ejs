@@ -1,89 +1,83 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-  </head>
-  <style>
-    #newtab{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #newtab h2{
-      font-weight: 600;
-      font-size: 20px;
-    }
-  </style>
-  <body>
-    <div id="main">
-      <div id="left">
-        <div id="folder">
-          <h4 style="text-transform: capitalize;"><%=folder%></h4>
-          <div id="icons">
-            <i id="fileicon" class="ri-file-line"></i>
-            <i id="foldericon"class="ri-folder-line"></i>
-            <a href="/"><i class="ri-restart-line"></i></a>
-            <i class="ri-file-copy-line"></i>
-          </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+  <div id="main">
+    <div id="overlay">
+        <form id="renameform" action="/rename" method="get">
+          <input id="rename" type="text" name="rename" style="color: #0f0f0f;" >
+          <input id="btn-over" type="submit">
+        </form>
+    </div>
+    <div id="left">
+      <div id="folder">
+        <h1><%=folder%></h1>
+        <div id="ficon">
+          <i id="fileicon" class="ri-file-fill"></i>
+          <i id="foldericon" class="ri-folder-fill"></i>
+          <a href="/"><i id="refresh" class="ri-refresh-line"></i></a>
         </div>
-        <form style="display: none;" id="createfileform" action="/createfile">
-          <input type="text" name="file" style="color: black;" id="fileinput"  placeholder="filename">
-        </form>
-        <form style="display: none;" id="createfolderform" action="/createfolder">
-          <input type="text" name="folder" style="color: black;" id="folderinput"  placeholder="foldername">
-        </form>
-        <div id="files">
-          <% files.forEach(function(file){ %>
-            <div class="filediv">
-              <div class="folder-name">
-                <%if(file.isDirectory()){ %>
-                  <i class="ri-folder-fill"></i>
-                <%}else{ %>
+      </div>
+
+      <form action="/createfile" id="fileform" style="display: none;">
+        <input style="padding-left: 3px; height: 30px; font-size: 15px ; border-radius: 5px; color: #000;" type="text" name="filename" placeholder="file name">
+      </form>
+      <form action="/createfolder" id="folderform" style="display: none;">
+        <input style="padding-left: 3px; height: 30px; font-size: 15px ; border-radius: 5px; color: #000;" type="text" name="foldername" placeholder="folder name">
+      </form>
+      
+      <div id="files">
+        <%files.forEach(function(file){ %>
+          <div class="file">
+            <div id="one" style="display: flex;
+            align-items: center; justify-content: center; gap: 10px;">
+              <%if(file.isDirectory()){%>
+                <i class="ri-folder-fill"></i>
+                <%}else{%>
                   <i class="ri-file-fill"></i>
-               <% }%>
-                <h3><a data-filename="<%=file.name%>" href="fileopened/<%=file.name%>"><%= file.name %></a></h3>
-              </div>
+              <%}%>
+  
+              <%if(file.isDirectory()){ %>
+                <a href="/folderopened/<%=file.name%>"><h4><%=file.name%></h4></a>
+                <%}else{ %>
+                  <a href="/fileopened/<%=file.name%>"><h4><%=file.name%></h4></a>
+              <% }  %>
+            </div>
+            <div id="ficons">
               <%if(file.isDirectory()){%>
                 <a href="/delete/folder/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
-                <%}else{%>
-                  <div id="ficons">
-                    <a href="/delete/file/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
-                  <%}%>
-                <i class="ri-pencil-line"></i>
-              </div>
+              <%}else{ %>
+                <a href="/delete/file/<%=file.name%>"><i class="ri-delete-bin-line"></i></a>
+              <%}%>
+              
+              <i data-filename="<%= file.name %>" id="renameicon" class="ri-pencil-line"></i>
             </div>
-          <% }) %>
-        </div>
-      </div>
-      <div id="right">
-        <div id="newtab">
-          <h2><%=filename%></h2>
+          </div>
+        <% })%>
       </div>
     </div>
-    <!-- <script>
-      var clicked=0
+    <div id="right">
+        <nav>
+            <div id="tab">
+                <h6><%=filename%> </h6>
+                <a href="/"><i id="cancel" class="ri-close-fill"></i></a>
+            </div>
+        </nav>
+            <div id="btn"><h4>save</h4></div>
+        <form action="/save/<%=filename%>" id="textform" method="post">
+            <textarea name="textarea" id="textarea">
+                <%=fileData%>
+            </textarea>
+        </form>
 
-      document.querySelector("#fileicon").addEventListener("click",function(){
-        donooff()
-        document.querySelector("#createfileform").style.display="initial";
-        console.log()
-      
-      })
-      document.querySelector("#foldericon").addEventListener("click",function(){
-        donooff()
-        document.querySelector("#createfolderform").style.display="initial";
-      })
-
-      function donooff(){
-        document.querySelectorAll("form").forEach(function(form){
-          form.style.display="none";
-        })
-      }
-      window.addEventListener("click  ",function(dets){
-        console.log(dets)
-      })
-    </script> -->
-  </body>
+    </div>
+  </div>
+  <script src="/javascripts/script.js"></script>
+</body>
 </html>
